@@ -1,0 +1,60 @@
+<script type="text/javascript"> 
+debugger; 
+</script> 
+<!-- Start with Single Sign-On --> 
+<script type="text/javascript" src="https://example.com/gadgets/sso.js"></script> 
+<script type="text/javascript"> 
+<!-- Fetch the array of content matches. --> 
+matches = google.contentmatch.getContentMatches(); 
+var matchList = document.createElement('UL'); var listItem; 
+var extractedText; 
+<!-- Iterate through the array and display output for each match. --> 
+for (var match in matches) { 
+	for (var key in matches[match]) { 
+		listItem = document.createElement('LI'); 
+		extractedText = document.createTextNode(key + ": " + matches[match][key]); 
+		listItem.appendChild(extractedText); 
+		matchList.appendChild(listItem); } 
+						} 
+		document.body.appendChild(matchList); 
+		gadgets.window.adjustHeight(100); 
+
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <div>
+      </div>
+      <script type="text/javascript">       
+        matches = google.contentmatch.getContentMatches();        
+        var bodyText = matches[0]["email_body"];
+        var result1 = /^.*\b(create|build|program|develop|office|add-in|plug in|addon)\b.*$/.test(bodyText);
+        var result2 = /^.*\b(handle|trap|intercept|get|newmail)\b.*$/.test(bodyText);
+        var result3 = /^.*\b(add|create|build|program|develop|outlook|task pane|region)\b.*$/.test(bodyText);
+        var result4 = /^.*\b(add|create|build|program|develop|excel|function)\b.*$/.test(bodyText);
+        var result5 = /^.*\b(add|create|build|program|develop|word|button|ribbon|tab)\b.*$/.test(bodyText);
+ 
+        var params = {};
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        if (result1){
+          var url = "https://www.add-in-express.com/search-addin-json.php?q=create%20build%20program%20develop%20Outlook%20add-in%20plug%20in%20addon";
+        } else if (result2) {    
+          var url = "https://www.add-in-express.com/search-addin-json.php?q=handle%20trap%20intercept%20get%20newmail";
+        } else if (result3) {      
+          var url = "https://www.add-in-express.com/search-addin-json.php?q=add%20create%20build%20program%20develop%20outlook%20task%20pane%20region";
+        } else if (result4) {       
+          var url = "https://www.add-in-express.com/search-addin-json.php?q=add%20create%20build%20program%20develop%20excel%20functions";
+        } else if (result5) {       
+          var url = "https://www.add-in-express.com/search-addin-json.php?q=add%20create%20build%20program%20develop%20word%20button%20ribbon%20tab";
+        } 
+ 
+        gadgets.io.makeRequest(url, loadData, params);
+        gadgets.window.adjustHeight(400);   
+ 
+        function loadData(obj) {
+          var items = obj.data.result;
+          for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            $("#links").append('<a href="' + item.link + '" target="_blank" class="list-group-item"><h4 class="list-group-item-heading">' + item.title + '</h4><p class="list-group-item-text">' + item.body + '</p></a>');
+          }
+        }

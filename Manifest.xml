@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <ApplicationManifest xmlns="http://schemas.google.com/ApplicationManifest/2009">
  
-  <Name>ADX Answers</Name>
+  <Name>Timsa publish</Name>
  
   <Description>
    Agregar a Ryber
   </Description>
  
   <Extension id="TIMSAExtractor" type="contextExtractor">
-    <Name>ADX Stuff</Name>
+    <Name>TIMSA Stuff</Name>
     <Url>google.com:EmailBodyExtractor</Url>
-    <Triggers ref="ADXGadget"/>
+    <Triggers ref="TIMSAGadget"/>
     <Scope ref="emailBody"/>
     <Container name="mail"/>
   </Extension>
